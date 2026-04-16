@@ -1,0 +1,2 @@
+n_households,n_days_scored,n_alerts,alert_rate,target_alert_rate,single_sensor_households,single_sensor_fraction,graph_signal_degraded
+5,220,24,0.10909090909090909,0.07,5,1.0,True

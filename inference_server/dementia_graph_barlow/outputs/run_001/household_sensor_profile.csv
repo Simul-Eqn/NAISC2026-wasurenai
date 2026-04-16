@@ -1,0 +1,6 @@
+household_id,n_sensors,single_sensor_only
+H01,1,True
+H02,1,True
+H03,1,True
+H04,1,True
+H05,1,True
