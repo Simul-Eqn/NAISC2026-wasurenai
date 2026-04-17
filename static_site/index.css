@@ -3,11 +3,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
-html, body {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--color-paper-ivory);
@@ -766,18 +761,13 @@ body {
 }
 
 @media (max-width: 340px) {
-  .hero-content {
-    padding: 0.85rem 0.6rem;
-  }
-
   .hero h1 {
-    font-size: clamp(1.45rem, 10vw, 1.95rem);
-    letter-spacing: 0.02em;
-    max-width: calc(100vw - 1.2rem);
+    font-size: clamp(1.6rem, 11vw, 2.15rem);
+    letter-spacing: 0.03em;
   }
 
   .hero-tagline {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   .pipeline-track-wrapper {
