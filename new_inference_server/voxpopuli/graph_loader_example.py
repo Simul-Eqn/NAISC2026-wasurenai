@@ -13,7 +13,7 @@ from new_inference_server.voxpopuli.graph_loader import load_speaker_graphs
 
 if __name__ == "__main__":
     #graphs = build_utterance_graphs("new_inference_server/voxpopuli/data")
-    graphs = load_speaker_graphs("new_inference_server/voxpopuli/data", "1185") 
+    graphs = load_speaker_graphs("new_inference_server/voxpopuli/data", "1185", use_svd_preprocessor=True) 
     print(f"Loaded {len(graphs)} utterance graphs")
-    print(graphs[0].shape if graphs else "No graphs found")
+    print(graphs[0].node_features.shape if graphs else "No graphs found")
     

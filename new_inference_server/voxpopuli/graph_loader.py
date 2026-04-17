@@ -12,7 +12,7 @@ from .loader import load_speaker_manifest
 from .svd_preprocessor import SVDNodeFeaturePreprocessor
 
 
-DEFAULT_SVD_PREPROCESSOR_PATH = Path(__file__).resolve().with_name("svd_preprocessor.npz")
+DEFAULT_SVD_PREPROCESSOR_PATH = Path(__file__).resolve().parent/"new_inference_server"/"voxpopuli"/"svd_preprocessor.npz"
 
 
 def _trim_trailing_padding(audio_embedding: Any, pad_atol: float = 1e-6) -> np.ndarray:
