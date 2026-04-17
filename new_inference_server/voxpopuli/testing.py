@@ -84,7 +84,8 @@ def is_speaker_folder(folder: Path) -> bool:
 def rebuild_manifests(data_root: Path) -> None:
     global_manifest: dict[str, Any] = {"speakers": []}
 
-    speaker_dirs = [Path("new_inference_server/voxpopuli/data/1185")] #sorted([folder for folder in data_root.iterdir() if is_speaker_folder(folder)], key=lambda p: p.name)
+    # [Path("new_inference_server/voxpopuli/data/1185"), Path("new_inference_server/voxpopuli/data/1289")] #
+    speaker_dirs = sorted([folder for folder in data_root.iterdir() if is_speaker_folder(folder)], key=lambda p: p.name)
     for speaker_dir in speaker_dirs:
         speaker_id = speaker_dir.name
         entries: list[dict[str, Any]] = []

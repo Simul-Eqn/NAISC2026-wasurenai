@@ -15,5 +15,5 @@ if __name__ == "__main__":
     #graphs = build_utterance_graphs("new_inference_server/voxpopuli/data")
     graphs = load_speaker_graphs("new_inference_server/voxpopuli/data", "1185") 
     print(f"Loaded {len(graphs)} utterance graphs")
-    print(graphs[0] if graphs else "No graphs found")
+    print(graphs[0].shape if graphs else "No graphs found")
     

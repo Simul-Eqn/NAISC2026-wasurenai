@@ -13,6 +13,7 @@ from .graph_loader import (
     load_speaker_graphs,
     load_speaker_graph_records,
 )
+from .svd_preprocessor import SVDNodeFeaturePreprocessor, fit_and_save
 
 __all__ = [
     "load_global_manifest",
@@ -24,4 +25,6 @@ __all__ = [
     "build_utterance_graph",
     "build_utterance_graphs",
     "load_speaker_graphs",
+    "SVDNodeFeaturePreprocessor",
+    "fit_and_save",
 ]
