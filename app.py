@@ -514,8 +514,11 @@ def submit_keystroke_checkin() -> ResponseReturnValue:
         except (TypeError, ValueError):
             return jsonify({"ok": False, "error": "invalid anomaly_score"}), 400
 
-    conn = get_db_conn()
+    conn = get_db_conn() 
     cursor = conn.cursor()
+    # TODO: POTENTIALLY ATTACKERS CAN WASTE OUR STORAGE
+    # BY REGISTERING AND THEN ADDING RECORDS THAT DON'T AFFECT ANYONE? 
+    '''
     patient_exists = cursor.execute(
         "SELECT 1 FROM patients WHERE patient_keystroke_id = ?",
         (patient_keystroke_id,),
@@ -523,6 +526,7 @@ def submit_keystroke_checkin() -> ResponseReturnValue:
     if not patient_exists:
         conn.close()
         return jsonify({"ok": False, "error": "unknown patient_keystroke_id"}), 404
+    '''
 
     cursor.execute(
         """
