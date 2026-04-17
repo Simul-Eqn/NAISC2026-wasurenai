@@ -1,0 +1,9 @@
+name: naisc26_meralion
+channels:
+  - defaults
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+  - https://repo.anaconda.com/pkgs/msys2
+dependencies:
+  - torchcodec[build=*cuda*]
+prefix: D:\Simu\conda_envs\naisc26_meralion

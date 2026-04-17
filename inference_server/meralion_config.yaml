@@ -17,7 +17,8 @@ data:
   household_col: household_id
   sensor_col: sensor_id
   sensor_value_col: sensor_raw_values 
-  temporal_window: dweeky
+  sensor_value_mode: vector
+  temporal_window: week
   transition_max_gap_minutes: 90
 
 alert:

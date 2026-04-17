@@ -1,2 +1,6 @@
 ignore
 backup
+*/testing.py
+.vscode
+*/__pycache__
+*/*.pyc
