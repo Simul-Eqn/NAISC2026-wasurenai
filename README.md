@@ -9,6 +9,10 @@ ignore ```inference_server```, the only possibly important part of it is the mer
 The repository root now includes a small Flask app that serves the site in
 `static_site/`.
 
+You can preview it with live server there. 
+
+
+### debugging only 
 Run it from the repository root with:
 
 ```bash
@@ -18,3 +22,9 @@ python app.py
 
 Open `http://127.0.0.1:5000/` in your browser.
 
+
+### Deployment 
+```nano .env```
+and add in: 
+```TELEGRAM_BOT_TOKEN=...```
+```docker compose up```
