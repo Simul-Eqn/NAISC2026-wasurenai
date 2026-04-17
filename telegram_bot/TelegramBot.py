@@ -276,6 +276,19 @@ def set_patient_keystroke_id(chat_id: int, patient_keystroke_id: str) -> bool:
     return changed
 
 
+def get_patient_keystroke_id(chat_id: int) -> str | None:
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    row = c.execute(
+        "SELECT patient_keystroke_id FROM patients WHERE chat_id = ?",
+        (chat_id,),
+    ).fetchone()
+    conn.close()
+    if not row:
+        return None
+    return row[0]
+
+
 # ---------------------------------------------------------------------------
 # Reminder firing
 # ---------------------------------------------------------------------------
@@ -710,9 +723,14 @@ async def handle_voice_message(update: Update, context: ContextTypes.DEFAULT_TYP
         )
         return
 
-    voice_status, anomaly_score = await analyze_voice_features(features)
-
     chat_id = update.effective_chat.id
+    patient_keystroke_id = get_patient_keystroke_id(chat_id)
+    voice_status, anomaly_score = await analyze_voice_features(
+        features,
+        chat_id=chat_id,
+        patient_keystroke_id=patient_keystroke_id,
+    )
+
     source = "voice_note" if voice is not None else "audio_file"
     relative_audio_path = (
         os.path.relpath(archived_audio_path, BASE_DIR) if archived_audio_path else None
@@ -784,11 +802,17 @@ def _resolve_audio_suffix(voice, audio) -> str:
     return ".audio"
 
 
-def _submit_mel_to_backend(features: np.ndarray) -> tuple[str, float | None]:
+def _submit_mel_to_backend(
+    features: np.ndarray,
+    chat_id: int,
+    #patient_keystroke_id: str | None,
+) -> tuple[str, float | None]:
     payload = {
         "mel_spectrogram": features.tolist(),
         "shape": list(features.shape),
         "source": "telegram_checkin",
+        "chat_id": chat_id,
+        #"patient_keystroke_id": patient_keystroke_id,
     }
     response = requests.post(
         VOICE_ANALYSIS_ENDPOINT,
@@ -814,12 +838,21 @@ def _submit_mel_to_backend(features: np.ndarray) -> tuple[str, float | None]:
     return status, score
 
 
-async def analyze_voice_features(features: np.ndarray) -> tuple[str, float | None]:
+async def analyze_voice_features(
+    features: np.ndarray,
+    chat_id: int,
+    patient_keystroke_id: str | None,
+) -> tuple[str, float | None]:
     if not USE_REAL_ANALYSIS:
         return "normal", None
 
     try:
-        return await asyncio.to_thread(_submit_mel_to_backend, features)
+        return await asyncio.to_thread(
+            _submit_mel_to_backend,
+            features,
+            chat_id,
+            patient_keystroke_id,
+        )
     except Exception as exc:
         logger.exception("Real voice analysis failed, falling back to normal: %s", exc)
         return "normal", None
