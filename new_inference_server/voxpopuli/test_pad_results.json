@@ -1,0 +1,682 @@
+{
+  "settings": {
+    "data_root": "D:\\Simu\\projects\\2026\\NAISC2026-wasurenai\\new_inference_server\\voxpopuli\\new_inference_server\\voxpopuli\\data",
+    "svd_preprocessor_path": "D:\\Simu\\projects\\2026\\NAISC2026-wasurenai\\new_inference_server\\voxpopuli\\new_inference_server\\voxpopuli\\svd_preprocessor.npz",
+    "global_epochs": 2,
+    "speaker_epochs": 1,
+    "speaker_learning_rate": 0.0003,
+    "adaptation_ratio": 0.7,
+    "threshold_quantile": 0.95,
+    "min_graphs_per_speaker": 3,
+    "max_speakers": 3,
+    "device": "cuda",
+    "global_config": {
+      "hidden_dim": 64,
+      "projection_dim": 64,
+      "num_layers": 2,
+      "dropout": 0.1,
+      "mask_ratio": 0.2,
+      "edge_dropout_ratio": 0.1,
+      "noise_std": 0.01,
+      "lambda_offdiag": 0.005,
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05,
+      "epochs": 100
+    }
+  },
+  "global": {
+    "num_speakers_used": 3,
+    "num_graphs_used": 87,
+    "losses": [
+      62.022474573946546,
+      62.02084346201228
+    ],
+    "final_loss": 62.02084346201228
+  },
+  "speakers": [
+    {
+      "speaker_id": "1185",
+      "num_graphs": 68,
+      "num_adaptation_graphs": 48,
+      "threshold": 0.011810520291328418,
+      "num_anomalies": 3,
+      "anomaly_ratio": 0.04411764705882353,
+      "mean_score": 0.0034275414312587064,
+      "mean_adaptation_score": 0.0030935481190681458,
+      "labeled_count": 0,
+      "tp": null,
+      "fp": null,
+      "tn": null,
+      "fn": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "speaker_id": "1289",
+      "num_graphs": 15,
+      "num_adaptation_graphs": 10,
+      "threshold": 0.023914837837219205,
+      "num_anomalies": 1,
+      "anomaly_ratio": 0.06666666666666667,
+      "mean_score": 0.004903181393941244,
+      "mean_adaptation_score": 0.005935764312744141,
+      "labeled_count": 0,
+      "tp": null,
+      "fp": null,
+      "tn": null,
+      "fn": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "speaker_id": "1318",
+      "num_graphs": 4,
+      "num_adaptation_graphs": 3,
+      "threshold": 0.0070563733577728265,
+      "num_anomalies": 2,
+      "anomaly_ratio": 0.5,
+      "mean_score": 0.007730141282081604,
+      "mean_adaptation_score": 0.0037668347358703613,
+      "labeled_count": 0,
+      "tp": null,
+      "fp": null,
+      "tn": null,
+      "fn": null,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    }
+  ],
+  "speaker_details": {
+    "1185": {
+      "summary": {
+        "speaker_id": "1185",
+        "num_graphs": 68,
+        "num_adaptation_graphs": 48,
+        "threshold": 0.011810520291328418,
+        "num_anomalies": 3,
+        "anomaly_ratio": 0.04411764705882353,
+        "mean_score": 0.0034275414312587064,
+        "mean_adaptation_score": 0.0030935481190681458,
+        "labeled_count": 0,
+        "tp": null,
+        "fp": null,
+        "tn": null,
+        "fn": null,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "per_graph": [
+        {
+          "graph_id": "20090202-0900-PLENARY-12-en_20090202-19:48:44_19",
+          "score": 0.003915309906005859,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-12-en_20090202-19:48:44_20",
+          "score": 0.0013664960861206055,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-12-en_20090202-19:48:44_4",
+          "score": 0.00209808349609375,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-12-en_20090202-19:48:44_5",
+          "score": 0.005031228065490723,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-12-en_20090202-22:04:48_10",
+          "score": 0.0008636713027954102,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-12-en_20090202-22:04:48_6",
+          "score": 0.0016319751739501953,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_10",
+          "score": 0.003610670566558838,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_13",
+          "score": 0.018552422523498535,
+          "is_anomaly": true,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_14",
+          "score": 0.002541184425354004,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_16",
+          "score": 0.0005081892013549805,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_17",
+          "score": 0.0019776225090026855,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_18",
+          "score": 0.0016205310821533203,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_19",
+          "score": 0.002973794937133789,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_2",
+          "score": 0.0005604028701782227,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_20",
+          "score": 0.0005242824554443359,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_21",
+          "score": 0.002732396125793457,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_22",
+          "score": 0.0027922391891479492,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_23",
+          "score": 0.0005621910095214844,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_24",
+          "score": 0.0002595186233520508,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_5",
+          "score": 0.004786252975463867,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-13-en_20090202-22:17:00_8",
+          "score": 0.014859676361083984,
+          "is_anomaly": true,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_1",
+          "score": 0.0025911927223205566,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_10",
+          "score": 0.001530289649963379,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_11",
+          "score": 0.0005714893341064453,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_12",
+          "score": 0.0036185383796691895,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_13",
+          "score": 0.003138601779937744,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_14",
+          "score": 0.00024247169494628906,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_18",
+          "score": 0.0015718340873718262,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_2",
+          "score": 0.0018849372863769531,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_21",
+          "score": 0.00025469064712524414,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_22",
+          "score": 0.0041637420654296875,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_23",
+          "score": 0.0009196996688842773,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_24",
+          "score": 0.0018701553344726562,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_25",
+          "score": 0.003710806369781494,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_26",
+          "score": 0.006147801876068115,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_3",
+          "score": 0.00047647953033447266,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_5",
+          "score": 0.0014884471893310547,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_7",
+          "score": 0.0007288455963134766,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_8",
+          "score": 0.0005846023559570312,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-14-en_20090202-22:26:38_9",
+          "score": 0.0007426738739013672,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_1",
+          "score": 0.018778622150421143,
+          "is_anomaly": true,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_10",
+          "score": 0.004524707794189453,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_11",
+          "score": 0.003232240676879883,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_12",
+          "score": 0.0015537738800048828,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_13",
+          "score": 0.002069234848022461,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_14",
+          "score": 0.002047419548034668,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_15",
+          "score": 0.0049932003021240234,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_16",
+          "score": 0.0012856721878051758,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_17",
+          "score": 0.005162477493286133,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_18",
+          "score": 0.003452301025390625,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_2",
+          "score": 0.005297720432281494,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_6",
+          "score": 0.0038906335830688477,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_7",
+          "score": 0.004928112030029297,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_8",
+          "score": 0.003475487232208252,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-15-en_20090202-22:38:05_9",
+          "score": 0.004578530788421631,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-16-en_20090202-22:45:34_1",
+          "score": 0.0017122626304626465,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-16-en_20090202-22:45:34_2",
+          "score": 0.0009224414825439453,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-16-en_20090202-22:45:34_3",
+          "score": 0.010946154594421387,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-16-en_20090202-22:45:34_4",
+          "score": 0.0034110546112060547,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-16-en_20090202-22:45:34_5",
+          "score": 0.0015117526054382324,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-16-en_20090202-22:45:34_7",
+          "score": 0.005239963531494141,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-17-en_20090202-22:55:00_10",
+          "score": 0.0036765336990356445,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-17-en_20090202-22:55:00_11",
+          "score": 0.0016896724700927734,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-17-en_20090202-22:55:00_12",
+          "score": 0.004243195056915283,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-17-en_20090202-22:55:00_15",
+          "score": 0.001117706298828125,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-17-en_20090202-22:55:00_17",
+          "score": 0.006533145904541016,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-17-en_20090202-22:55:00_5",
+          "score": 0.0020589828491210938,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090202-0900-PLENARY-17-en_20090202-22:55:00_9",
+          "score": 0.010734379291534424,
+          "is_anomaly": false,
+          "label": null
+        }
+      ]
+    },
+    "1289": {
+      "summary": {
+        "speaker_id": "1289",
+        "num_graphs": 15,
+        "num_adaptation_graphs": 10,
+        "threshold": 0.023914837837219205,
+        "num_anomalies": 1,
+        "anomaly_ratio": 0.06666666666666667,
+        "mean_score": 0.004903181393941244,
+        "mean_adaptation_score": 0.005935764312744141,
+        "labeled_count": 0,
+        "tp": null,
+        "fp": null,
+        "tn": null,
+        "fn": null,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "per_graph": [
+        {
+          "graph_id": "20090203-0900-PLENARY-14-en_20090203-22:36:40_11",
+          "score": 0.003020644187927246,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090203-0900-PLENARY-14-en_20090203-22:36:40_12",
+          "score": 0.006158232688903809,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090203-0900-PLENARY-14-en_20090203-22:36:40_13",
+          "score": 0.0018898844718933105,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090203-0900-PLENARY-14-en_20090203-22:36:40_14",
+          "score": 0.0029420852661132812,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090203-0900-PLENARY-14-en_20090203-22:36:40_16",
+          "score": 0.03844296932220459,
+          "is_anomaly": true,
+          "label": null
+        },
+        {
+          "graph_id": "20090203-0900-PLENARY-14-en_20090203-22:36:40_4",
+          "score": 0.001023411750793457,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090203-0900-PLENARY-14-en_20090203-22:36:40_5",
+          "score": 0.0008401870727539062,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090203-0900-PLENARY-3-en_20090203-09:53:01_3",
+          "score": 0.0013461112976074219,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090203-0900-PLENARY-3-en_20090203-09:53:01_4",
+          "score": 0.0017827749252319336,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090204-0900-PLENARY-17-en_20090204-22:00:09_11",
+          "score": 0.0019113421440124512,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090204-0900-PLENARY-17-en_20090204-22:00:09_15",
+          "score": 0.007404327392578125,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090204-0900-PLENARY-17-en_20090204-22:00:09_17",
+          "score": 0.0022507309913635254,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090204-0900-PLENARY-17-en_20090204-22:00:09_18",
+          "score": 0.0008391141891479492,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090204-0900-PLENARY-17-en_20090204-22:00:09_4",
+          "score": 0.0011883974075317383,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090204-0900-PLENARY-17-en_20090204-22:00:09_5",
+          "score": 0.002507507801055908,
+          "is_anomaly": false,
+          "label": null
+        }
+      ]
+    },
+    "1318": {
+      "summary": {
+        "speaker_id": "1318",
+        "num_graphs": 4,
+        "num_adaptation_graphs": 3,
+        "threshold": 0.0070563733577728265,
+        "num_anomalies": 2,
+        "anomaly_ratio": 0.5,
+        "mean_score": 0.007730141282081604,
+        "mean_adaptation_score": 0.0037668347358703613,
+        "labeled_count": 0,
+        "tp": null,
+        "fp": null,
+        "tn": null,
+        "fn": null,
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "per_graph": [
+        {
+          "graph_id": "20090202-0900-PLENARY-9-en_20090202-18:05:04_5",
+          "score": 0.002368032932281494,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090204-0900-PLENARY-17-en_20090204-22:36:20_4",
+          "score": 0.0013551712036132812,
+          "is_anomaly": false,
+          "label": null
+        },
+        {
+          "graph_id": "20090204-0900-PLENARY-17-en_20090204-22:36:20_6",
+          "score": 0.007577300071716309,
+          "is_anomaly": true,
+          "label": null
+        },
+        {
+          "graph_id": "20090205-0900-PLENARY-3-en_20090205-10:50:28_3",
+          "score": 0.019620060920715332,
+          "is_anomaly": true,
+          "label": null
+        }
+      ]
+    }
+  }
+}
