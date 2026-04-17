@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patient History</title>
+  <style>
+    :root {
+      --bg: #f4f7f2;
+      --ink: #1f2f38;
+      --muted: #5f7680;
+      --panel: #ffffff;
+      --line: #d8e3dc;
+      --ok: #5d8f66;
+      --warn: #cc9b42;
+      --alert: #b95a57;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f7faf7 0%, var(--bg) 70%);
+    }
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .title h1 { margin: 0; font-size: 1.4rem; }
+    .title p { margin: 0.25rem 0 0; color: var(--muted); }
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.48rem 0.72rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem;
+      margin-bottom: 0.9rem;
+    }
+    .panel h2 {
+      margin: 0 0 0.65rem;
+      font-size: 1.05rem;
+    }
+    .controls {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0.7rem;
+    }
+    .controls select {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.35rem 0.45rem;
+      font-size: 0.9rem;
+      background: #fff;
+    }
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+    .chart-box {
+      border: 1px solid #e7efea;
+      border-radius: 10px;
+      padding: 0.65rem;
+      background: #fff;
+    }
+    .chart-title {
+      margin: 0 0 0.4rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 0.55rem 0.35rem;
+      border-bottom: 1px solid #ebf1ed;
+      font-size: 0.92rem;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.2rem 0.48rem;
+      font-size: 0.79rem;
+      font-weight: 600;
+    }
+    .ok { background: #e8f4ea; color: var(--ok); }
+    .warn { background: #fcf2e0; color: var(--warn); }
+    .alert { background: #faeaea; color: var(--alert); }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="title">
+        <h1>{{ history.patient_id }} History</h1>
+        <p>Keystroke ID: {{ history.patient_keystroke_id }}</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="{{ url_for('doctor_portal') }}">Back to dashboard</a>
+      </div>
+    </header>
+
+    <section class="panel">
+      <form class="controls" method="get" action="{{ url_for('doctor_patient_history', chat_id=history.chat_id) }}">
+        <input type="hidden" name="focus" value="{{ focus }}">
+        <label for="n">Latest records:</label>
+        <select id="n" name="n" onchange="this.form.submit()">
+          <option value="10" {% if history.limit == 10 %}selected{% endif %}>10</option>
+          <option value="25" {% if history.limit == 25 %}selected{% endif %}>25</option>
+          <option value="50" {% if history.limit == 50 %}selected{% endif %}>50</option>
+          <option value="100" {% if history.limit == 100 %}selected{% endif %}>100</option>
+        </select>
+      </form>
+
+      <div class="charts">
+        <div class="chart-box" id="voice-section">
+          <p class="chart-title">Voice Status Over Time</p>
+          <canvas id="voiceChart" height="110"></canvas>
+        </div>
+        <div class="chart-box" id="keystroke-section">
+          <p class="chart-title">Keystroke Status Over Time</p>
+          <canvas id="keystrokeChart" height="110"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Voice Trigger Events (latest {{ history.limit }})</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Source</th>
+            <th>Anomaly Score</th>
+            <th>Audio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if history.voice_events %}
+            {% for event in history.voice_events %}
+              <tr>
+                <td>{{ event.created_at }}</td>
+                <td>
+                  <span class="tag {% if event.status == 'high_anomaly' %}alert{% elif event.status == 'mild_anomaly' %}warn{% else %}ok{% endif %}">
+                    {{ event.status }}
+                  </span>
+                </td>
+                <td>{{ event.source }}</td>
+                <td>{{ event.anomaly_score if event.anomaly_score is not none else '-' }}</td>
+                <td>
+                  {% if event.has_audio %}
+                    <audio controls preload="none" src="{{ url_for('doctor_checkin_audio', checkin_id=event.id) }}"></audio>
+                  {% else %}
+                    -
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr><td colspan="5">No voice events yet.</td></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    const voicePoints = {{ history.voice_points|tojson }};
+    const keystrokePoints = {{ history.keystroke_points|tojson }};
+
+    function toDataset(points) {
+      return {
+        labels: points.map(p => p.x),
+        values: points.map(p => p.y)
+      };
+    }
+
+    const voice = toDataset(voicePoints);
+    const key = toDataset(keystrokePoints);
+
+    const commonOptions = {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: {
+          min: 0,
+          max: 2,
+          ticks: {
+            stepSize: 1,
+            callback: (value) => {
+              if (value === 0) return "normal";
+              if (value === 1) return "mild";
+              if (value === 2) return "high";
+              return value;
+            }
+          }
+        },
+        x: { ticks: { maxTicksLimit: 8 } }
+      }
+    };
+
+    new Chart(document.getElementById("voiceChart"), {
+      type: "line",
+      data: {
+        labels: voice.labels,
+        datasets: [{ data: voice.values, borderColor: "#5d8f66", tension: 0.25, pointRadius: 3 }]
+      },
+      options: commonOptions
+    });
+
+    new Chart(document.getElementById("keystrokeChart"), {
+      type: "line",
+      data: {
+        labels: key.labels,
+        datasets: [{ data: key.values, borderColor: "#cc9b42", tension: 0.25, pointRadius: 3 }]
+      },
+      options: commonOptions
+    });
+
+    const focus = {{ focus|tojson }};
+    if (focus === "keystroke") {
+      document.getElementById("keystroke-section").scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  </script>
+</body>
+</html>

@@ -2,5 +2,7 @@ ignore
 backup
 */testing.py
 .vscode
+.venv 
 */__pycache__
 */*.pyc
+telegram_bot_api_key.txt

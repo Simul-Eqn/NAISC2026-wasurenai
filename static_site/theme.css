@@ -1,0 +1,32 @@
+:root {
+  --color-sky-mist: #8FAEBF;
+  --color-sky-steel: #6B92A6;
+  --color-sky-slate: #4A7080;
+  --color-ink-ocean: #2E4F5E;
+  --color-paper-ivory: #F4F0E8;
+  --color-paper-linen: #EDE8DC;
+  --color-moss: #8A9A72;
+  --color-moss-soft: #A8B892;
+  --color-cloud: #FEFCF8;
+  --color-copy-main: #2C3E3E;
+  --color-copy-soft: #5A6F6F;
+  --color-copy-muted: #8A9A9A;
+  --color-accent-amber: #C4A265;
+  --color-accent-clay: #C08070;
+
+  /* Legacy aliases kept to avoid breakage in any unupdated styles. */
+  --blue: var(--color-sky-mist);
+  --blue-deep: var(--color-sky-steel);
+  --blue-dark: var(--color-sky-slate);
+  --blue-darker: var(--color-ink-ocean);
+  --cream: var(--color-paper-ivory);
+  --cream-warm: var(--color-paper-linen);
+  --sage: var(--color-moss);
+  --sage-light: var(--color-moss-soft);
+  --white: var(--color-cloud);
+  --text: var(--color-copy-main);
+  --text-light: var(--color-copy-soft);
+  --text-muted: var(--color-copy-muted);
+  --gold: var(--color-accent-amber);
+  --coral-soft: var(--color-accent-clay);
+}

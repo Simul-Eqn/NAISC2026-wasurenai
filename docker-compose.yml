@@ -1,0 +1,37 @@
+services:
+  flask-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.flask
+    container_name: wasurenai-flask
+    environment:
+      FLASK_SECRET_KEY: ${FLASK_SECRET_KEY:-dev-only-secret-change-me}
+      KEYSTROKE_API_KEY: ${KEYSTROKE_API_KEY:-}
+      WASURENAI_DB_PATH: /data/wasurenai.db
+    ports:
+      - "2026:5000"
+    volumes:
+      - wasurenai-data:/data
+    restart: unless-stopped
+
+  telegram-bot:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.bot
+    container_name: wasurenai-telegram-bot
+    environment:
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      WEBSITE_URL: ${WEBSITE_URL:-https://wasurenai.uiutech.xyz}
+      USE_REAL_ANALYSIS: ${USE_REAL_ANALYSIS:-0}
+      VOICE_ANALYSIS_ENDPOINT: ${VOICE_ANALYSIS_ENDPOINT:-https://wasurenaibackend.uiutech.xyz/submit}
+      VOICE_ANALYSIS_TIMEOUT_SECONDS: ${VOICE_ANALYSIS_TIMEOUT_SECONDS:-10}
+      WASURENAI_DB_PATH: /data/wasurenai.db
+      AUDIO_ARCHIVE_DIR: /data/audio_checkins
+    volumes:
+      - wasurenai-data:/data
+    restart: unless-stopped
+    depends_on:
+      - flask-app
+
+volumes:
+  wasurenai-data:

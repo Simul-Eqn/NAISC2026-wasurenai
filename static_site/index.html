@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wasurenai — Technology that cares</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  <section class="hero">
+    <svg class="leaf leaf-1" viewBox="0 0 200 300" style="--r:-15deg">
+      <ellipse cx="80" cy="150" rx="70" ry="140" fill="rgba(138,154,114,0.6)" transform="rotate(-10 80 150)" />
+      <line x1="80" y1="20" x2="80" y2="280" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+      <path d="M80 60Q50 100 45 150Q42 180 60 220" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5" />
+      <path d="M80 80Q110 120 115 170Q118 200 100 240" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5" />
+    </svg>
+    <svg class="leaf leaf-2" viewBox="0 0 200 300" style="--r:20deg">
+      <ellipse cx="100" cy="150" rx="65" ry="130" fill="rgba(138,154,114,0.5)" transform="rotate(5 100 150)" />
+      <line x1="100" y1="30" x2="100" y2="270" stroke="rgba(255,255,255,0.25)" stroke-width="1" />
+    </svg>
+    <svg class="leaf leaf-3" viewBox="0 0 160 240" style="--r:-30deg">
+      <ellipse cx="80" cy="120" rx="55" ry="110" fill="rgba(138,154,114,0.45)" transform="rotate(-5 80 120)" />
+      <line x1="80" y1="20" x2="80" y2="220" stroke="rgba(255,255,255,0.2)" stroke-width="0.8" />
+    </svg>
+    <div class="hero-content">
+      <h1>Wasurenai</h1>
+      <p class="hero-tagline">Technology that cares.</p>
+      <p class="hero-subtitle">Seamless technology, built for dignity and care</p>
+    </div>
+    <div class="scroll-hint">
+      <span>Explore the pipeline</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section class="pipeline-section">
+    <div class="section-title">
+      <h2>The care pipeline</h2>
+      <p>From first warning to daily companion. Click any stage to explore.</p>
+    </div>
+
+    <div class="pipeline-track-wrapper">
+      <div class="pipeline-track">
+        <div class="stage-card" onclick="openDetail(0)">
+          <div class="stage-inner">
+            <div class="stage-number">01</div>
+            <div class="stage-icon keyboard">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <line x1="6" y1="8" x2="6" y2="8.01" />
+                <line x1="10" y1="8" x2="10" y2="8.01" />
+                <line x1="14" y1="8" x2="14" y2="8.01" />
+                <line x1="18" y1="8" x2="18" y2="8.01" />
+                <line x1="6" y1="12" x2="6" y2="12.01" />
+                <line x1="18" y1="12" x2="18" y2="12.01" />
+                <line x1="8" y1="16" x2="16" y2="16" />
+              </svg>
+            </div>
+            <div class="stage-title">Pre-diagnosis</div>
+            <p class="stage-desc">AI keyboard quietly learns your typing baseline and flags early anomalies.</p>
+            <div class="stage-cta">Click to explore</div>
+          </div>
+        </div>
+
+        <div class="connector"><span class="connector-arrow">›</span></div>
+
+        <div class="stage-card" onclick="openDetail(1)">
+          <div class="stage-inner">
+            <div class="stage-number">02</div>
+            <div class="stage-icon doctor">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2" />
+                <circle cx="10" cy="7" r="4" />
+                <line x1="19" y1="8" x2="19" y2="14" />
+                <line x1="16" y1="11" x2="22" y2="11" />
+              </svg>
+            </div>
+            <div class="stage-title">Doctor's visit</div>
+            <p class="stage-desc">Doctor confirms, installs the app, and connects you to support.</p>
+            <div class="stage-cta">Click to explore</div>
+          </div>
+        </div>
+
+        <div class="connector"><span class="connector-arrow">›</span></div>
+
+        <div class="stage-card" onclick="openDetail(2)">
+          <div class="stage-inner">
+            <div class="stage-number">03</div>
+            <div class="stage-icon daily">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div class="stage-title">Every day</div>
+            <p class="stage-desc">Chatbot check-ins, audio sampling, and keystroke tracking run gently in the
+              background.</p>
+            <div class="stage-cta">Click to explore</div>
+          </div>
+        </div>
+
+        <div class="connector"><span class="connector-arrow">›</span></div>
+
+        <div class="stage-card" onclick="openDetail(3)">
+          <div class="stage-inner">
+            <div class="stage-number">04</div>
+            <div class="stage-icon alert">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 01-3.46 0" />
+              </svg>
+            </div>
+            <div class="stage-title">Anomaly detected</div>
+            <p class="stage-desc">The same doctor who diagnosed you is alerted. Continuity of care, built in.</p>
+            <div class="stage-cta">Click to explore</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="safety-section">
+    <div class="safety-content">
+      <h2>"Take me home"</h2>
+      <p>A one-tap widget on the patient's home screen. No menus, no typing, no confusion. Just a gentle guide back to
+        where you belong. Always available, always there.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Wasurenai</p>
+    <p class="meaning">忘れない — "don't forget"</p>
+  </footer>
+
+  <div class="overlay" id="overlay">
+    <div class="overlay-backdrop" onclick="closeDetail()"></div>
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-header">
+        <button class="detail-close" onclick="closeDetail()">&#10005;</button>
+        <div class="detail-stage-label" id="detailLabel"></div>
+        <h2 class="detail-title" id="detailTitle"></h2>
+      </div>
+      <div class="detail-body" id="detailBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const stages = [
+      {
+        label: 'Stage 01',
+        title: 'Pre-diagnosis',
+        body: `
+      <div class="detail-section">
+        <h3>How it starts</h3>
+        <p>Long before a formal diagnosis, the AI keyboard runs quietly inside the patient's phone. It learns their personal typing baseline over the first two weeks, then watches for deviations.</p>
+      </div>
+      <div class="detail-section">
+        <h3>What it detects</h3>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Tremor patterns</strong> — unusual pauses between keystrokes, irregular timing that deviates from baseline.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Word-finding difficulties</strong> — long hesitations mid-word, frequent backspacing, switching words mid-sentence.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Cognitive shifts</strong> — gradual changes in typing speed, accuracy, and message length over weeks.</p></div>
+      </div>
+      <div class="detail-section">
+        <h3>What happens next</h3>
+        <p>When the keyboard flags enough anomalies, the Telegram chatbot gently reaches out with guidance and can help the user book an appointment. For many users, this is the first signal they ever receive.</p>
+        <div style="margin-top:1rem"><span class="tech-tag app">App — keyboard</span><span class="tech-tag chatbot">Chatbot — Telegram</span></div>
+      </div>
+    `
+      },
+      {
+        label: 'Stage 02',
+        title: "Doctor's visit",
+        body: `
+      <div class="detail-section">
+        <h3>Continuity from the start</h3>
+        <p>The patient visits their doctor, who confirms the diagnosis. This same doctor becomes the permanent point of contact throughout the pipeline. No re-explaining, no new relationships to build.</p>
+      </div>
+      <div class="detail-section">
+        <h3>What the doctor does</h3>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Installs and configures the app</strong> — sets the home address for the "Take me home" widget, enables monitoring features, and adjusts sensitivity.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Connects to financial aid</strong> — links the patient to government support schemes through the integrated pipeline.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Sets up the chatbot</strong> — configures daily check-in times and medicine reminders tailored to the patient's routine.</p></div>
+      </div>
+      <div class="detail-section">
+        <h3>Why this matters</h3>
+        <p>The doctor controls the setup instead of an app store. Monitoring features are enabled with informed consent, and the configuration is tailored to the patient's specific condition and needs.</p>
+        <div style="margin-top:1rem"><span class="tech-tag app">App — settings</span><span class="tech-tag pipeline">Government aid pipeline</span></div>
+      </div>
+    `
+      },
+      {
+        label: 'Stage 03',
+        title: 'Every day',
+        body: `
+      <div class="detail-section">
+        <h3>Two systems, running in parallel</h3>
+        <p>After diagnosis, two monitoring streams work simultaneously. Neither requires the patient to remember or initiate anything.</p>
+      </div>
+      <div class="detail-section">
+        <h3>The Telegram chatbot</h3>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Daily check-ins</strong> — a warm message asking how the patient is feeling, what they had for lunch, or how they slept.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Audio sampling</strong> — during voice note check-ins, the system listens for slurring, repetition, or disorientation patterns.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Medicine reminders</strong> — gentle, timed nudges with warm language to reduce anxiety.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Appointment reminders</strong> — with enough notice and reassurance to keep the patient calm.</p></div>
+      </div>
+      <div class="detail-section">
+        <h3>The companion app</h3>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Keystroke tracking</strong> — continues learning the patient's baseline and flagging deviations, silently in the background.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>"Take me home" widget</strong> — always visible on the home screen. One tap opens navigation home.</p></div>
+        <div style="margin-top:1rem"><span class="tech-tag chatbot">Chatbot — Telegram</span><span class="tech-tag app">App — keyboard + widget</span></div>
+      </div>
+    `
+      },
+      {
+        label: 'Stage 04',
+        title: 'Anomaly detected',
+        body: `
+      <div class="detail-section">
+        <h3>When something changes</h3>
+        <p>If either the chatbot (via audio analysis) or the app (via keystroke patterns) detects a significant deviation from baseline, the system responds automatically.</p>
+      </div>
+      <div class="detail-section">
+        <h3>What happens</h3>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>The same doctor is alerted</strong> — the physician who made the original diagnosis receives a notification. No intake forms, no history to re-explain.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>Context is provided</strong> — the alert includes what triggered it, when it occurred, and how it compares to baseline.</p></div>
+        <div class="feature-item"><div class="feature-dot"></div><p><strong>The cycle repeats</strong> — after the alert, daily monitoring continues. The model updates its baseline to account for gradual progression.</p></div>
+      </div>
+      <div class="detail-section">
+        <h3>Privacy by design</h3>
+        <p>Nothing leaves the device unless an anomaly is flagged. Audio is processed locally. Keystroke data stays on-device. Only anomaly summaries are transmitted, never raw data.</p>
+        <div style="margin-top:1rem"><span class="tech-tag app">App — alerts</span><span class="tech-tag chatbot">Chatbot — audio</span><span class="tech-tag pipeline">Doctor dashboard</span></div>
+      </div>
+    `
+      }
+    ];
+
+    function openDetail(idx) {
+      const s = stages[idx];
+      document.getElementById('detailLabel').textContent = s.label;
+      document.getElementById('detailTitle').textContent = s.title;
+      document.getElementById('detailBody').innerHTML = s.body;
+      document.getElementById('overlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetail() {
+      document.getElementById('overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDetail();
+    });
+  </script>
+
+</body>
+
+</html>
