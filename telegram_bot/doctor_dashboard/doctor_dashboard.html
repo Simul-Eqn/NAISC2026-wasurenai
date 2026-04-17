@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doctor Dashboard</title>
+  <style>
+    :root {
+      --bg: #f4f7f2;
+      --ink: #1f2f38;
+      --muted: #5f7680;
+      --panel: #ffffff;
+      --ok: #5d8f66;
+      --warn: #cc9b42;
+      --alert: #b95a57;
+      --line: #d8e3dc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f7faf7 0%, var(--bg) 70%);
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 1.25rem; }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .title h1 { margin: 0; font-size: 1.45rem; }
+    .title p { margin: 0.25rem 0 0; color: var(--muted); }
+    .logout {
+      text-decoration: none;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.5rem 0.75rem;
+      background: #fff;
+      font-size: 0.92rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.9rem;
+      margin-bottom: 0.9rem;
+    }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem;
+    }
+    .stat .label { color: var(--muted); font-size: 0.88rem; }
+    .stat .value { margin-top: 0.25rem; font-size: 1.4rem; font-weight: 700; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 0.6rem 0.35rem;
+      border-bottom: 1px solid #ebf1ed;
+      font-size: 0.94rem;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    .tag {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .ok { background: #e8f4ea; color: var(--ok); }
+    .warn { background: #fcf2e0; color: var(--warn); }
+    .alert { background: #faeaea; color: var(--alert); }
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .toggle button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 0.28rem 0.58rem;
+      font-size: 0.82rem;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .toggle .state {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .status-link {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="title">
+        <h1>Patient Monitoring Dashboard</h1>
+        <p>Live view from reminder and check-in records.</p>
+      </div>
+      <a class="logout" href="{{ url_for('doctor_logout') }}">Log out</a>
+    </header>
+
+    <section class="grid">
+      <article class="stat"><div class="label">Patients Monitored</div><div class="value">{{ dashboard.patients_monitored }}</div></article>
+      <article class="stat"><div class="label">Recent Alerts (24h)</div><div class="value">{{ dashboard.alerts_24h }}</div></article>
+      <article class="stat"><div class="label">Pending Follow-ups</div><div class="value">{{ dashboard.pending_followups }}</div></article>
+    </section>
+
+    <section class="panel">
+      <table>
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Keystroke ID</th>
+            <th>Last Check-in</th>
+            <th>Voice Status</th>
+            <th>Keystroke Status</th>
+            <th>Next Action</th>
+            <th>Reminders</th>
+            <th>Audio Check-in Reminder</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if dashboard.rows %}
+            {% for row in dashboard.rows %}
+              <tr>
+                <td>{{ row.patient_id }}</td>
+                <td>{{ row.patient_keystroke_id }}</td>
+                <td>{{ row.last_checkin }}</td>
+                <td>
+                  <a class="status-link" href="{{ url_for('doctor_patient_history', chat_id=row.chat_id, n=25, focus='voice') }}">
+                    <span class="tag {{ row.voice_status_class }}">{{ row.voice_status_label }}</span>
+                  </a>
+                </td>
+                <td>
+                  <a class="status-link" href="{{ url_for('doctor_patient_history', chat_id=row.chat_id, n=25, focus='keystroke') }}">
+                    <span class="tag {{ row.keystroke_status_class }}">{{ row.keystroke_status_label }}</span>
+                  </a>
+                </td>
+                <td>{{ row.next_action }}</td>
+                <td>{{ row.reminder_count }}</td>
+                <td>
+                  <form class="toggle" method="post" action="{{ url_for('doctor_audio_checkin_toggle') }}">
+                    <input type="hidden" name="chat_id" value="{{ row.chat_id }}">
+                    {% if row.audio_checkin_enabled %}
+                      <input type="hidden" name="enabled" value="0">
+                      <button type="submit">Disable</button>
+                      <span class="state">Enabled</span>
+                    {% else %}
+                      <input type="hidden" name="enabled" value="1">
+                      <button type="submit">Enable</button>
+                      <span class="state">Disabled</span>
+                    {% endif %}
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="8">No patient data yet. Once reminders or check-ins are recorded, they will appear here.</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+</html>

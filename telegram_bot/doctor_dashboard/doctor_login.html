@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doctor Portal</title>
+  <style>
+    :root {
+      --bg: #eef2ec;
+      --card: #ffffff;
+      --ink: #21323a;
+      --muted: #61757d;
+      --accent: #5b7d6f;
+      --danger: #a4514f;
+      --ring: rgba(91, 125, 111, 0.2);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: radial-gradient(circle at top, #f7f9f4 0%, var(--bg) 55%, #dfe8e3 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+    }
+    .card {
+      width: min(420px, 100%);
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid #d6e1da;
+      box-shadow: 0 14px 40px rgba(33, 50, 58, 0.12);
+      padding: 1.25rem;
+    }
+    h1 { margin: 0 0 0.5rem; font-size: 1.35rem; }
+    p { margin: 0 0 1rem; color: var(--muted); }
+    .error {
+      background: #fdeaea;
+      border: 1px solid #efc7c6;
+      color: var(--danger);
+      border-radius: 10px;
+      padding: 0.6rem 0.75rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.94rem;
+    }
+    label { display: block; margin-bottom: 0.3rem; font-weight: 600; font-size: 0.92rem; }
+    input {
+      width: 100%;
+      padding: 0.66rem 0.75rem;
+      border-radius: 10px;
+      border: 1px solid #c6d5cd;
+      margin-bottom: 0.9rem;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--ring); }
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { filter: brightness(0.97); }
+  </style>
+</head>
+<body>
+  <form class="card" method="post" action="{{ url_for('doctor_portal') }}">
+    <h1>Doctor Portal</h1>
+    <p>Sign in to review patient monitoring status.</p>
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" autocomplete="username" required>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password" required>
+    <button type="submit">Sign in</button>
+  </form>
+</body>
+</html>
