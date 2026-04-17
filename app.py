@@ -396,7 +396,7 @@ def load_patient_history(chat_id: int, limit: int) -> dict:
 
 @app.route("/")
 def index() -> ResponseReturnValue:
-    return send_from_directory(STATIC_DIR, "wasurenai.html")
+    return send_from_directory(STATIC_DIR, "index.html")
 
 
 @app.route("/doctor", methods=["GET", "POST"])
@@ -536,11 +536,9 @@ def submit_keystroke_checkin() -> ResponseReturnValue:
 
     return jsonify({"ok": True})
 
-'''
 @app.route("/<path:filename>")
 def static_files(filename: str):
     return send_from_directory(STATIC_DIR, filename)
-'''
 
 
 if __name__ == "__main__":
