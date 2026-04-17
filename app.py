@@ -396,7 +396,7 @@ def load_patient_history(chat_id: int, limit: int) -> dict:
 
 @app.route("/")
 def index() -> ResponseReturnValue:
-    return send_from_directory(STATIC_DIR, "wasurenai.html")
+    return send_from_directory(STATIC_DIR, "index.html")
 
 
 @app.route("/doctor", methods=["GET", "POST"])
@@ -514,8 +514,11 @@ def submit_keystroke_checkin() -> ResponseReturnValue:
         except (TypeError, ValueError):
             return jsonify({"ok": False, "error": "invalid anomaly_score"}), 400
 
-    conn = get_db_conn()
+    conn = get_db_conn() 
     cursor = conn.cursor()
+    # TODO: POTENTIALLY ATTACKERS CAN WASTE OUR STORAGE
+    # BY REGISTERING AND THEN ADDING RECORDS THAT DON'T AFFECT ANYONE? 
+    '''
     patient_exists = cursor.execute(
         "SELECT 1 FROM patients WHERE patient_keystroke_id = ?",
         (patient_keystroke_id,),
@@ -523,6 +526,7 @@ def submit_keystroke_checkin() -> ResponseReturnValue:
     if not patient_exists:
         conn.close()
         return jsonify({"ok": False, "error": "unknown patient_keystroke_id"}), 404
+    '''
 
     cursor.execute(
         """
@@ -536,11 +540,9 @@ def submit_keystroke_checkin() -> ResponseReturnValue:
 
     return jsonify({"ok": True})
 
-'''
 @app.route("/<path:filename>")
 def static_files(filename: str):
     return send_from_directory(STATIC_DIR, filename)
-'''
 
 
 if __name__ == "__main__":
