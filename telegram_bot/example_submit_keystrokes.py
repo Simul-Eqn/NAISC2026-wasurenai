@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = "http://localhost:5000"
+BASE_URL = "https://wasurenai.uiutech.xyz" #"http://localhost:5000"
 API_URL = f"{BASE_URL}/api/keystroke-checkin"
 
 payload = {
@@ -12,7 +12,7 @@ payload = {
 headers = {
     "Content-Type": "application/json",
     # Include this only if KEYSTROKE_API_KEY is set on the server:
-    # "X-API-Key": "your_api_key_here",
+    "X-API-Key": "wasurenaiKEYSTROKEapiKEY123",
 }
 
 resp = requests.post(API_URL, json=payload, headers=headers, timeout=10)

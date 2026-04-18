@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AlzKey Tracker"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#1A237E"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keystroke research assistant"
+            android:textSize="13sp"
+            android:textColor="#78909C"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Status card -->
+        <androidx.cardview.widget.CardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Status"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="#37474F"/>
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Loading..."
+                    android:textSize="13sp"
+                    android:textColor="#546E7A"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="8dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="12dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Enable Keystroke Logging"
+                        android:textSize="14sp"
+                        android:textColor="#37474F"/>
+                    <Switch
+                        android:id="@+id/switch_logging"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Step 1 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SETUP STEPS"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#90A4AE"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_enable_keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Step 1: Enable AlzKey Keyboard"
+            android:backgroundTint="#1A237E"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btn_switch_keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Step 2: Switch to AlzKey Keyboard"
+            android:backgroundTint="#283593"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Actions -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ACTIONS"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="#90A4AE"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_generate_synthetic"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Generate Synthetic Dataset"
+            android:backgroundTint="#00897B"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btn_view_data"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="View Keystroke Data"
+            android:backgroundTint="#546E7A"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/btn_settings"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Settings (Home Location, User ID)"
+            android:backgroundTint="#78909C"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+</ScrollView>

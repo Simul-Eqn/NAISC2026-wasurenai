@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView android:id="@+id/tv_stats"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:textSize="13sp" android:textColor="#37474F"
+        android:background="#E8F5E9" android:padding="12dp"
+        android:fontFamily="monospace"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView android:id="@+id/tv_count"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:textSize="12sp" android:textColor="#78909C"
+        android:layout_marginBottom="4dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button android:id="@+id/btn_clear_data"
+        android:layout_width="match_parent" android:layout_height="48dp"
+        android:text="Clear All Data" android:backgroundTint="#EF5350"
+        android:textColor="@android:color/white" android:layout_marginTop="8dp"/>
+</LinearLayout>

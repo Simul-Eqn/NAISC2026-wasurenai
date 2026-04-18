@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AlzKeyTracker">
+
+        <!-- CONSENT screen shown first -->
+        <activity
+            android:name=".ConsentActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- MAIN dashboard -->
+        <activity android:name=".MainActivity" android:exported="false" />
+
+        <!-- SETTINGS -->
+        <activity android:name=".SettingsActivity" android:exported="false" />
+
+        <!-- DATA VIEWER -->
+        <activity android:name=".DataViewActivity" android:exported="false" />
+
+        <!-- CUSTOM KEYBOARD SERVICE -->
+        <service
+            android:name=".keyboard.AlzKeyboardService"
+            android:exported="true"
+            android:label="@string/keyboard_name"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <!-- This XML file tells Android about our keyboard -->
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
+        </service>
+
+        <!-- HOME WIDGET -->
+        <receiver
+            android:name=".widget.HomeWidget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/home_widget_info" />
+        </receiver>
+
+    </application>
+</manifest>

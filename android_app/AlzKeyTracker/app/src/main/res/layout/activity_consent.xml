@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Informed Consent"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#1A237E"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:lineSpacingExtra="4dp"
+            android:text="This application records how you type — specifically the timing of your keystrokes — to support research into early detection of cognitive changes.\n\nWhat we collect:\n• Which keys you press\n• How long you hold each key\n• The pauses between keystrokes\n• Which app you were typing in\n\nWhat we do NOT collect:\n• The actual content of your messages or passwords\n• Your name or contact information\n• Any location data\n\nYour data is stored only on this device. You can delete it at any time from the app.\n\nParticipation is completely voluntary. You may withdraw consent at any time by uninstalling the app or disabling the keyboard in Settings.\n\nBy tapping 'I Agree', you confirm you understand and consent to this data collection."
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btn_agree"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="I Agree — Continue"
+            android:backgroundTint="#1A237E"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btn_decline"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Decline — Exit"
+            android:backgroundTint="#CFD8DC"
+            android:textColor="#37474F"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+</ScrollView>
