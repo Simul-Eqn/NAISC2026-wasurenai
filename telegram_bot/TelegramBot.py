@@ -460,9 +460,10 @@ async def set_keystroke_id(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     """Assign or update the user's patient keystroke ID."""
     if not context.args:
         await update.message.reply_text(
+            "Get our keyboard from wasurenai.uiutech.xyz/keyboard\n"
             "Please provide your keystroke ID like this:\n"
-            "/setkeystroke your-id\n\n"
-            "Use 3-64 characters: letters, numbers, dash, underscore."
+            "/setkeystroke [your-id]\n\n"
+            "3-64 characters: letters, numbers, dash, underscore."
         )
         return
 
