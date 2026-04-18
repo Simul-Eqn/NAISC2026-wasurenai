@@ -1,0 +1,484 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-green: #10b981;
+    --light-green: #d1fae5;
+    --dark-green: #047857;
+    --white: #ffffff;
+    --light-gray: #f3f4f6;
+    --dark-gray: #374151;
+    --orange: #f97316;
+    --red: #ef4444;
+    --telegram-blue: #0088cc;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--white);
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0 20px 0;
+}
+
+header h1 {
+    font-size: 3em;
+    color: var(--primary-green);
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+header .subtitle {
+    font-size: 0.9em;
+    color: var(--dark-green);
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+/* Page transitions */
+.page {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Start Page */
+.hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+    color: var(--dark-green);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: var(--dark-gray);
+}
+
+.info-section {
+    background-color: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 50px;
+}
+
+.info-section h3 {
+    color: var(--dark-green);
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.info-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-section li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    color: var(--dark-gray);
+    font-size: 1.1em;
+}
+
+.info-section li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-green);
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+/* Buttons */
+.btn {
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-green);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--light-gray);
+    color: var(--dark-green);
+    border: 2px solid var(--primary-green);
+}
+
+.btn-secondary:hover {
+    background-color: var(--light-green);
+}
+
+.cta-section {
+    text-align: center;
+}
+
+.cta-section .btn {
+    min-width: 250px;
+}
+
+/* Results Page */
+.results-section {
+    background-color: var(--light-gray);
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.results-section h2 {
+    color: var(--dark-green);
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Risk Axis */
+.risk-axis-container {
+    margin-bottom: 40px;
+}
+
+.risk-axis {
+    position: relative;
+    height: 40px;
+    background-color: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+
+.zone {
+    flex: 1;
+    position: relative;
+}
+
+.zone-safe {
+    background-color: #dcfce7;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    flex-basis: 13%;
+}
+
+.zone-at-risk {
+    background: linear-gradient(to right, #fcd34d, #fef3c7);
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    flex-basis: 32%;
+}
+
+.zone-confident {
+    background: linear-gradient(to right, #fee2e2, #fecaca);
+    flex-basis: 55%;
+}
+
+.indicator {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 50px;
+    background-color: var(--dark-green);
+    border-radius: 2px;
+    transition: left 0.6s ease-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.axis-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.label {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--dark-gray);
+}
+
+.label-left {
+    color: #16a34a;
+}
+
+.label-middle {
+    color: #d97706;
+}
+
+.label-right {
+    color: #dc2626;
+}
+
+.score-display {
+    text-align: center;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid var(--light-green);
+}
+
+#scoreValue {
+    display: block;
+    font-size: 3em;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+}
+
+.score-label {
+    font-size: 0.9em;
+    color: var(--dark-gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Recommendation Box */
+.recommendation-box {
+    background-color: var(--white);
+    border-left: 5px solid var(--primary-green);
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.recommendation-box h3 {
+    color: var(--dark-green);
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.recommendation-box p {
+    color: var(--dark-gray);
+    font-size: 1.05em;
+    line-height: 1.8;
+}
+
+.recommendation-box.at-risk {
+    border-left-color: #f97316;
+    background-color: #fff7ed;
+}
+
+.recommendation-box.at-risk h3 {
+    color: #d97706;
+}
+
+.recommendation-box.confident {
+    border-left-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.recommendation-box.confident h3 {
+    color: #dc2626;
+}
+
+/* Telegram CTA Section */
+.telegram-cta {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.cta-label {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.telegram-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.qr-code-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.qr-code {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    border: 2px solid var(--telegram-blue);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 136, 204, 0.2);
+}
+
+.qr-code:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 136, 204, 0.3);
+}
+
+.qr-hint {
+    font-size: 0.85em;
+    color: var(--telegram-blue);
+    font-weight: 500;
+}
+
+.or-divider {
+    color: var(--dark-gray);
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+.telegram-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background-color: var(--telegram-blue);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+}
+
+.telegram-link:hover {
+    background-color: #0077b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 136, 204, 0.4);
+}
+
+.telegram-icon {
+    font-size: 1.3em;
+}
+
+/* Action Section */
+.action-section {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-section .btn {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2em;
+    }
+
+    .hero h2 {
+        font-size: 1.8em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .info-section {
+        padding: 20px;
+    }
+
+    .results-section {
+        padding: 20px;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+
+    .cta-section .btn {
+        width: 100%;
+        min-width: unset;
+    }
+
+    #scoreValue {
+        font-size: 2.2em;
+    }
+
+    .action-section {
+        flex-direction: column;
+    }
+
+    .action-section .btn {
+        width: 100%;
+    }
+
+    .telegram-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .or-divider {
+        order: 2;
+    }
+
+    .qr-code-section {
+        order: 1;
+    }
+
+    .telegram-link {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .qr-code {
+        width: 100px;
+        height: 100px;
+    }
+}

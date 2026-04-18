@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wasurenai Keyboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    :root {
+      --page-bg: linear-gradient(180deg, rgba(143,174,191,0.22) 0%, rgba(244,240,232,1) 40%, rgba(237,232,220,1) 100%);
+      --card-shadow: 0 18px 50px rgba(46,79,94,0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--color-copy-main);
+      background: var(--page-bg);
+      overflow-x: hidden;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .page-shell::before,
+    .page-shell::after {
+      content: '';
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(10px);
+      opacity: 0.45;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .page-shell::before {
+      width: 22rem;
+      height: 22rem;
+      background: rgba(168,184,146,0.22);
+      top: -5rem;
+      right: -6rem;
+    }
+
+    .page-shell::after {
+      width: 18rem;
+      height: 18rem;
+      background: rgba(143,174,191,0.24);
+      left: -4rem;
+      bottom: 8rem;
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(143,174,191,0.16);
+      color: var(--color-sky-slate);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: var(--color-moss);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      line-height: 0.94;
+      letter-spacing: 0.05em;
+      margin: 0 0 1rem;
+      color: var(--color-ink-ocean);
+      max-width: 11ch;
+    }
+
+    .lead {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.8;
+      color: var(--color-copy-soft);
+      max-width: 58ch;
+      margin: 0 0 1.8rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      min-height: 3.25rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .button:hover { transform: translateY(-1px); }
+
+    .button-primary {
+      background: var(--color-ink-ocean);
+      color: var(--color-cloud);
+      box-shadow: var(--card-shadow);
+    }
+
+    .button-secondary {
+      background: rgba(254,252,248,0.72);
+      color: var(--color-ink-ocean);
+      border-color: rgba(107,146,166,0.18);
+    }
+
+    .support-copy {
+      font-size: 0.9rem;
+      color: var(--color-copy-soft);
+      margin: 0;
+    }
+
+    .mock-card {
+      background: rgba(254,252,248,0.82);
+      border: 1px solid rgba(107,146,166,0.18);
+      border-radius: 24px;
+      box-shadow: var(--card-shadow);
+      padding: 1.4rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .mock-screen {
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(143,174,191,0.16), rgba(254,252,248,0.95));
+      border: 1px solid rgba(107,146,166,0.12);
+      padding: 1.25rem;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .mock-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--color-copy-muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--color-moss);
+      font-weight: 700;
+    }
+
+    .signal::before {
+      content: '';
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 999px;
+      background: var(--color-moss);
+      box-shadow: 0 0 0 0.25rem rgba(138,154,114,0.15);
+    }
+
+    .feature-stack {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .feature {
+      padding: 1rem 1rem 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(254,252,248,0.82);
+      border: 1px solid rgba(107,146,166,0.12);
+    }
+
+    .feature h2 {
+      margin: 0 0 0.35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--color-ink-ocean);
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--color-copy-soft);
+      line-height: 1.65;
+      font-size: 0.92rem;
+    }
+
+    .mini-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .metric {
+      background: rgba(143,174,191,0.13);
+      border: 1px solid rgba(107,146,166,0.1);
+      border-radius: 18px;
+      padding: 0.9rem;
+      text-align: center;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.2rem;
+      color: var(--color-ink-ocean);
+      margin-bottom: 0.2rem;
+    }
+
+    .metric span {
+      font-size: 0.74rem;
+      color: var(--color-copy-soft);
+      line-height: 1.4;
+    }
+
+    .sections {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .panel {
+      background: rgba(254,252,248,0.84);
+      border: 1px solid rgba(107,146,166,0.14);
+      border-radius: 22px;
+      padding: 1.25rem;
+      box-shadow: 0 12px 32px rgba(46,79,94,0.08);
+    }
+
+    .panel h3 {
+      margin: 0 0 0.65rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--color-ink-ocean);
+    }
+
+    .panel p,
+    .panel li {
+      color: var(--color-copy-soft);
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .panel ul {
+      margin: 0.2rem 0 0;
+      padding-left: 1.1rem;
+    }
+
+    .download-band {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .download-card {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.4rem 1.5rem;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(46,79,94,0.96), rgba(107,146,166,0.92));
+      color: var(--color-cloud);
+      box-shadow: 0 20px 44px rgba(46,79,94,0.22);
+    }
+
+    .download-card h3 {
+      margin: 0 0 0.35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .download-card p {
+      margin: 0;
+      color: rgba(254,252,248,0.82);
+      line-height: 1.6;
+      max-width: 54ch;
+    }
+
+    .download-card .button {
+      background: var(--color-cloud);
+      color: var(--color-ink-ocean);
+      box-shadow: none;
+    }
+
+    .footer {
+      padding: 0 1.5rem 2.5rem;
+      text-align: center;
+      color: var(--color-copy-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 3rem;
+      }
+
+      .sections {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero,
+      .sections,
+      .download-band {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .mock-screen {
+        min-height: 360px;
+      }
+
+      .mini-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .download-card {
+        padding: 1.2rem;
+      }
+
+      .download-card h3 {
+        font-size: 1.55rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Alternative keyboard</div>
+        <h1>Wasurenai Keyboard</h1>
+        <p class="lead">
+          A gentle alternative keyboard that can quietly learn typing rhythm, detect
+          subtle changes over time, and help surface early warning signs for possible
+          pre-dementia progression before things become harder to notice.
+        </p>
+        <div class="actions">
+          <a class="button button-primary" href="/keyboard/download">Download beta</a>
+          <a class="button button-secondary" href="/#pipeline">See the care pipeline</a>
+        </div>
+        <p class="support-copy">
+          Built to stay in the background, protect dignity, and support doctors and caregivers with earlier context.
+        </p>
+      </div>
+
+      <div class="mock-card" aria-label="Keyboard concept preview">
+        <div class="mock-screen">
+          <div>
+            <div class="mock-topline">
+              <span>Wasurenai</span>
+              <span class="signal">Monitoring on</span>
+            </div>
+          </div>
+
+          <div class="feature-stack">
+            <div class="feature">
+              <h2>Typing baseline</h2>
+              <p>Quietly learns cadence, pauses, corrections, and rhythm so small changes can be noticed sooner.</p>
+            </div>
+            <div class="feature">
+              <h2>Early warning</h2>
+              <p>Flags unusual shifts that may suggest cognitive decline, without forcing the user to change how they type.</p>
+            </div>
+          </div>
+
+          <div class="mini-metrics">
+            <div class="metric">
+              <strong>Low-friction</strong>
+              <span>Works where typing already happens</span>
+            </div>
+            <div class="metric">
+              <strong>Private</strong>
+              <span>Designed to keep sensitive signals minimal</span>
+            </div>
+            <div class="metric">
+              <strong>Helpful</strong>
+              <span>Supports earlier conversations with care teams</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sections">
+      <article class="panel">
+        <h3>What it does</h3>
+        <p>Wasurenai Keyboard is an alternative keyboard designed to stay familiar to use while collecting the signals needed for gentle progression tracking.</p>
+      </article>
+      <article class="panel">
+        <h3>Why it matters</h3>
+        <p>Typing changes can appear before more obvious symptoms. A keyboard can observe those changes early, without adding friction to daily life.</p>
+      </article>
+      <article class="panel">
+        <h3>Who it helps</h3>
+        <ul>
+          <li>People who want a discreet early-warning tool</li>
+          <li>Doctors who need more context sooner</li>
+          <li>Caregivers who want a calmer, clearer picture</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="download-band" id="download">
+      <div class="download-card">
+        <div>
+          <h3>Download the beta</h3>
+          <p>
+            Grab the starter package for Wasurenai Keyboard. Replace the beta file with your actual Android build when you're ready to ship.
+          </p>
+        </div>
+        <a class="button" href="/keyboard/download">Download</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Wasurenai Keyboard is a concept landing page for early warning and progression tracking support.
+    </footer>
+  </div>
+</body>
+</html>

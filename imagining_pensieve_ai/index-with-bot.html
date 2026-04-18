@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PENSIEVE-AI - Dementia Screening</title>
+    <link rel="stylesheet" href="style-with-bot.css">
+</head>
+<body>
+    <!-- Start Test Page -->
+    <div id="startPage" class="page active">
+        <div class="container">
+            <header>
+                <h1>PENSIEVE-AI</h1>
+                <p class="subtitle">FAKE DEMO</p>
+            </header>
+            
+            <main>
+                <div class="hero">
+                    <h2>Quick Dementia Screening</h2>
+                    <p>A simple, low-friction screening test using drawing patterns</p>
+                </div>
+                
+                <section class="info-section">
+                    <h3>How it works</h3>
+                    <ul>
+                        <li>Complete a simple drawing task</li>
+                        <li>Get instant results</li>
+                        <li>Understand your risk level</li>
+                    </ul>
+                </section>
+                
+                <div class="cta-section">
+                    <button class="btn btn-primary" onclick="startTest()">Start Test</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="resultsPage" class="page">
+        <div class="container">
+            <header>
+                <h1>PENSIEVE-AI</h1>
+                <p class="subtitle">FAKE DEMO</p>
+            </header>
+            
+            <main>
+                <div class="results-section">
+                    <h2>Your Results</h2>
+                    
+                    <div class="risk-axis-container">
+                        <div class="risk-axis">
+                            <!-- Safe Zone -->
+                            <div class="zone zone-safe"></div>
+                            <!-- At Risk Zone -->
+                            <div class="zone zone-at-risk"></div>
+                            <!-- Confident Zone -->
+                            <div class="zone zone-confident"></div>
+                            
+                            <!-- Indicator -->
+                            <div class="indicator" id="indicator" style="left: 0%"></div>
+                        </div>
+                        
+                        <!-- Labels -->
+                        <div class="axis-labels">
+                            <span class="label label-left">Safe</span>
+                            <span class="label label-middle">At Risk</span>
+                            <span class="label label-right">Confident</span>
+                        </div>
+                        
+                        <!-- Score display -->
+                        <div class="score-display">
+                            <span id="scoreValue">0.00</span>
+                            <span class="score-label">Risk Score</span>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-box" id="recommendationBox">
+                        <h3 id="recommendationTitle">Low Risk</h3>
+                        <p id="recommendationText">Your screening results suggest a low risk for cognitive decline.</p>
+                        
+                        <!-- Telegram Bot CTA (shown only for "at risk") -->
+                        <div id="telegramCta" class="telegram-cta" style="display: none;">
+                            <p class="cta-label">Get personalized support:</p>
+                            <div class="telegram-container">
+                                <div class="qr-code-section">
+                                    <a href="https://t.me/wasurenai_bot" target="_blank" rel="noopener noreferrer">
+                                        <img src="bot_qrcode.png" alt="Scan to open Telegram bot" class="qr-code">
+                                    </a>
+                                    <span class="qr-hint">Tap to open</span>
+                                </div>
+                                <div class="or-divider">or</div>
+                                <a href="https://t.me/wasurenai_bot" target="_blank" rel="noopener noreferrer" class="telegram-link">
+                                    <span class="telegram-icon">✈️</span>
+                                    <span>Open Telegram Bot</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-section">
+                    <button class="btn btn-secondary" onclick="retestDrawing()">Redo Drawing</button>
+                    <button class="btn btn-primary" onclick="goToHome()">Back to Home</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="app-with-bot.js"></script>
+</body>
+</html>

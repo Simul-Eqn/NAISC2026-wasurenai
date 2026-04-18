@@ -1,4 +1,5 @@
 from pathlib import Path
+from io import BytesIO
 import os
 import sqlite3
 from datetime import datetime, timezone
@@ -397,6 +398,30 @@ def load_patient_history(chat_id: int, limit: int) -> dict:
 @app.route("/")
 def index() -> ResponseReturnValue:
     return send_from_directory(STATIC_DIR, "index.html")
+
+
+@app.route("/keyboard")
+def keyboard_page() -> ResponseReturnValue:
+    return send_from_directory(STATIC_DIR, "keyboard.html")
+
+
+@app.route("/keyboard/download")
+def keyboard_download() -> ResponseReturnValue:
+    download_text = (
+        "Wasurenai Keyboard\n"
+        "===================\n\n"
+        "This is the beta landing page for the Wasurenai keyboard concept.\n"
+        "It is designed to quietly learn typing rhythm, flag early changes, and\n"
+        "help caregivers spot possible pre-dementia warning signs sooner.\n\n"
+        "Next step:\n"
+        "- Replace this file with your actual APK or installer package when ready.\n"
+    )
+    return send_file(
+        BytesIO(download_text.encode("utf-8")),
+        mimetype="text/plain; charset=utf-8",
+        as_attachment=True,
+        download_name="Wasurenai_Keyboard_Beta.txt",
+    )
 
 
 @app.route("/doctor", methods=["GET", "POST"])

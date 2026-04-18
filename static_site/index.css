@@ -71,6 +71,31 @@ body {
   animation: fadeUp 0.8s ease-out 1.3s forwards;
 }
 
+.hero-keyboard-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.2rem;
+  padding: 0.68rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.42);
+  background: rgba(255,255,255,0.08);
+  color: var(--color-cloud);
+  text-decoration: none;
+  font-size: 0.76rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 1.55s forwards;
+}
+
+.hero-keyboard-link:hover {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.66);
+  transform: translateY(-1px);
+}
+
 .scroll-hint {
   position: absolute;
   z-index: 2;
@@ -655,6 +680,13 @@ body {
     white-space: nowrap;
   }
 
+  .hero-keyboard-link {
+    margin-top: 1rem;
+    padding: 0.62rem 0.9rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+  }
+
   .detail-close {
     top: max(0.75rem, env(safe-area-inset-top));
     right: max(0.75rem, env(safe-area-inset-right));
@@ -684,6 +716,12 @@ body {
     font-size: 0.78rem;
     letter-spacing: 0.12em;
   }
+
+  .hero-keyboard-link {
+    margin-top: 0.9rem;
+    padding: 0.56rem 0.8rem;
+    font-size: 0.64rem;
+  }
 }
 
 @media (max-width: 380px) {
@@ -705,6 +743,13 @@ body {
     margin-top: 1.75rem;
     font-size: 0.75rem;
     letter-spacing: 0.12em;
+  }
+
+  .hero-keyboard-link {
+    margin-top: 0.85rem;
+    padding: 0.5rem 0.72rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.07em;
   }
 
   .pipeline-track-wrapper {
