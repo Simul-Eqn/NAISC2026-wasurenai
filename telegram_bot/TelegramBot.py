@@ -21,8 +21,7 @@ import tempfile
 import warnings
 import asyncio
 import re
-import uuid
-from datetime import time
+from datetime import time, timezone, timedelta
 
 import librosa
 import numpy as np
@@ -61,6 +60,7 @@ logging.basicConfig(
 # Quiet down the noisy httpx logger
 logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
+GMT_PLUS_8 = timezone(timedelta(hours=8))
 
 # Ignore noisy environment-level deprecation warnings unrelated to bot logic.
 warnings.filterwarnings(
@@ -712,10 +712,10 @@ async def handle_voice_message(update: Update, context: ContextTypes.DEFAULT_TYP
         audio_file = await (voice or audio).get_file()
         os.makedirs(AUDIO_ARCHIVE_DIR, exist_ok=True)
         suffix = _resolve_audio_suffix(voice, audio)
-        filename = f"{update.effective_chat.id}_{uuid.uuid4().hex}{suffix}"
+        filename = _build_audio_archive_filename(update, suffix)
         archived_audio_path = os.path.join(AUDIO_ARCHIVE_DIR, filename)
         await audio_file.download_to_drive(custom_path=archived_audio_path)
-        features = preprocess_voice_file(archived_audio_path)
+        features = await asyncio.to_thread(preprocess_voice_file, archived_audio_path)
     except Exception as exc:
         logger.exception("Failed to preprocess audio message: %s", exc)
         await update.message.reply_text(
@@ -800,6 +800,44 @@ def _resolve_audio_suffix(voice, audio) -> str:
     if "ogg" in mime_type:
         return ".ogg"
     return ".audio"
+
+
+def _build_audio_archive_filename(update: Update, suffix: str) -> str:
+    chat_id = update.effective_chat.id
+    message_count = _next_audio_archive_counter(chat_id)
+    message_date = update.effective_message.date
+
+    if message_date.tzinfo is None:
+        message_date = message_date.replace(tzinfo=timezone.utc)
+    timestamp = message_date.astimezone(GMT_PLUS_8).strftime("%Y%m%dT%H%M%S")
+
+    return f"{chat_id}_{message_count}_{timestamp}{suffix}"
+
+
+def _next_audio_archive_counter(chat_id: int) -> int:
+    prefix = f"{chat_id}_"
+    highest = 0
+
+    try:
+        for entry in os.scandir(AUDIO_ARCHIVE_DIR):
+            if not entry.is_file() or not entry.name.startswith(prefix):
+                continue
+
+            parts = entry.name.split("_", 2)
+            if len(parts) < 3:
+                continue
+
+            try:
+                count = int(parts[1])
+            except ValueError:
+                continue
+
+            if count > highest:
+                highest = count
+    except FileNotFoundError:
+        return 1
+
+    return highest + 1
 
 
 def _submit_mel_to_backend(

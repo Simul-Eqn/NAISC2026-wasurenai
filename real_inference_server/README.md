@@ -149,7 +149,13 @@ Get user status and model metadata.
 
 1. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   conda create env 
+   conda activate ... 
+   pip install torch==2.10.0 --index-url ... 
+   pip install transformers 
+   pip install datasets 
+   pip install flask scipy scikit-learn  
+   conda install torchcodec[build=*cuda*] 
    ```
 
 2. Ensure the SVD preprocessor exists at the configured path:
@@ -165,13 +171,13 @@ Get user status and model metadata.
 
 ### Development (with automatic reload):
 ```bash
-flask run
+lask run --host 0.0.0.0 -p 7625
 ```
 
 ### Production (Gunicorn recommended):
 ```bash
 pip install gunicorn
-gunicorn -w 1 -b 0.0.0.0:5000 app:app
+gunicorn -w 1 -b 7625 app:app
 ```
 
 **Note:** The server uses a single worker (`-w 1`) because model inference maintains GPU state.
@@ -191,7 +197,7 @@ All data is stored locally:
 import requests
 import numpy as np
 
-BASE_URL = "http://localhost:5000"
+BASE_URL = "http://localhost:7615"
 
 # Create a test mel spectrogram
 mel_spec = np.random.randn(80, 100).tolist()

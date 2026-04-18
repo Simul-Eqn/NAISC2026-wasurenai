@@ -17,5 +17,8 @@ Testing:
 ```cd voxpopuli``` 
 ```python personalized_anomaly_detction.py``` 
 
+Saved personalized anomaly results to ...\new_inference_server\voxpopuli\personalized_anomaly_results.json
+Used 50 speakers and 846 graphs for global pretraining
+
 A debug I did: 
 ```python personalized_anomaly_detection.py --max_speakers 3 --global_epochs 2 --speaker_epochs 1 --results_path ./test_pad_results.json``` 

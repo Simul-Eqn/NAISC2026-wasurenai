@@ -10,7 +10,10 @@ import numpy as np
 from flask import Flask, jsonify, request
 
 # Add repo root to path
-REPO_ROOT = Path(__file__).resolve().parent.parent
+SERVER_FOLDER = Path(__file__).resolve().parent
+REPO_ROOT = SERVER_FOLDER.parent
+if str(SERVER_FOLDER) not in sys.path:
+    sys.path.insert(0, str(SERVER_FOLDER))
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
