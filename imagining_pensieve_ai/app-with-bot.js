@@ -1,7 +1,7 @@
 // Generate a random risk score for the mock demo
 function generateMockRiskScore() {
-    // Return a random score in the "at risk" range (0.13 - 0.45)
-    return 0.13 + Math.random() * (0.45 - 0.13);
+    // Always return a fixed score for deterministic mock results
+    return 0.23;
 }
 
 // Update the results display based on the risk score

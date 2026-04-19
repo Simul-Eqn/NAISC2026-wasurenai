@@ -890,7 +890,7 @@ async def analyze_voice_features(
             _submit_mel_to_backend,
             features,
             chat_id,
-            patient_keystroke_id,
+            #patient_keystroke_id,
         )
     except Exception as exc:
         logger.exception("Real voice analysis failed, falling back to normal: %s", exc)
