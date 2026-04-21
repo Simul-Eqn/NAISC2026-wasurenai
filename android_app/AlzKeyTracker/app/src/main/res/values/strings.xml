@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">AlzKey Tracker</string>
-    <string name="keyboard_name">AlzKey Keyboard</string>
+    <string name="app_name">Wasurenai</string>
+    <string name="keyboard_name">Wasurenai Keyboard</string>
+    <string name="disclaimer">This tool is a research aid only and is not a substitute for professional medical advice, diagnosis, or treatment.</string>
 </resources>

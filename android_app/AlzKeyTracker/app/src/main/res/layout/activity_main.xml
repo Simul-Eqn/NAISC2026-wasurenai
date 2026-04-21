@@ -1,147 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/background">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="20dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="AlzKey Tracker"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="#1A237E"
-            android:layout_marginBottom="4dp"/>
+        <!-- Header -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Wasurenai" android:textSize="28sp" android:textStyle="bold"
+            android:textColor="@color/primary" android:layout_marginBottom="2dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Cognitive keystroke analysis" android:textSize="13sp"
+            android:textColor="@color/text_secondary" android:layout_marginBottom="24dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Keystroke research assistant"
-            android:textSize="13sp"
-            android:textColor="#78909C"
-            android:layout_marginBottom="20dp"/>
+        <!-- Patient ID card -->
+        <androidx.cardview.widget.CardView android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:cardCornerRadius="14dp"
+            app:cardElevation="2dp" android:layout_marginBottom="16dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="YOUR PATIENT ID" android:textSize="10sp" android:textStyle="bold"
+                    android:textColor="@color/text_secondary" android:letterSpacing="0.12"
+                    android:layout_marginBottom="8dp"/>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:gravity="center_vertical">
+                    <TextView android:id="@+id/tv_patient_id"
+                        android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:textSize="20sp" android:textStyle="bold"
+                        android:fontFamily="monospace" android:textColor="@color/primary"/>
+                    <ImageButton android:id="@+id/btn_copy_id"
+                        android:layout_width="40dp" android:layout_height="40dp"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Copy ID"/>
+                </LinearLayout>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="Share this ID with your caregiver or use it with /setkeystroke in the companion app."
+                    android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginTop="6dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <!-- Status card -->
-        <androidx.cardview.widget.CardView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="16dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Status"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="#37474F"/>
-                <TextView
-                    android:id="@+id/tv_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Loading..."
-                    android:textSize="13sp"
-                    android:textColor="#546E7A"
-                    android:lineSpacingExtra="4dp"
-                    android:layout_marginTop="8dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="12dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Enable Keystroke Logging"
-                        android:textSize="14sp"
-                        android:textColor="#37474F"/>
-                    <Switch
-                        android:id="@+id/switch_logging"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+        <androidx.cardview.widget.CardView android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:cardCornerRadius="14dp"
+            app:cardElevation="2dp" android:layout_marginBottom="20dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="KEYBOARD STATUS" android:textSize="10sp" android:textStyle="bold"
+                    android:textColor="@color/text_secondary" android:letterSpacing="0.12"
+                    android:layout_marginBottom="10dp"/>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:gravity="center_vertical">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:id="@+id/tv_keystroke_count"
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="0 keystrokes collected" android:textSize="16sp"
+                            android:textStyle="bold" android:textColor="@color/text_primary"/>
+                        <TextView android:id="@+id/tv_logging_status"
+                            android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="Recording  ●" android:textSize="13sp"
+                            android:textColor="@color/healthy_fg" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+                    <Switch android:id="@+id/switch_logging"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Step 1 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SETUP STEPS"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:textColor="#90A4AE"
-            android:letterSpacing="0.1"
-            android:layout_marginBottom="8dp"/>
+        <!-- Primary CTA -->
+        <Button android:id="@+id/btn_analyse" android:layout_width="match_parent"
+            android:layout_height="60dp" android:text="Analyse My Typing Pattern"
+            android:backgroundTint="#4527A0" android:textColor="@color/white"
+            android:textSize="16sp" android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
 
-        <Button
-            android:id="@+id/btn_enable_keyboard"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Step 1: Enable AlzKey Keyboard"
-            android:backgroundTint="#1A237E"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="10dp"/>
+        <!-- Secondary actions -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="24dp">
+            <Button android:id="@+id/btn_raw_data" android:layout_width="0dp"
+                android:layout_height="48dp" android:layout_weight="1"
+                android:text="Raw Data" android:backgroundTint="@color/key_special"
+                android:textColor="@color/white" android:textSize="13sp"
+                android:layout_marginEnd="6dp"/>
+            <Button android:id="@+id/btn_settings" android:layout_width="0dp"
+                android:layout_height="48dp" android:layout_weight="1"
+                android:text="Settings" android:backgroundTint="@color/key_special"
+                android:textColor="@color/white" android:textSize="13sp"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_switch_keyboard"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Step 2: Switch to AlzKey Keyboard"
-            android:backgroundTint="#283593"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="20dp"/>
-
-        <!-- Actions -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ACTIONS"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:textColor="#90A4AE"
-            android:letterSpacing="0.1"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/btn_generate_synthetic"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Generate Synthetic Dataset"
-            android:backgroundTint="#00897B"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="10dp"/>
-
-        <Button
-            android:id="@+id/btn_view_data"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="View Keystroke Data"
-            android:backgroundTint="#546E7A"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="10dp"/>
-
-        <Button
-            android:id="@+id/btn_settings"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Settings (Home Location, User ID)"
-            android:backgroundTint="#78909C"
-            android:textColor="@android:color/white"/>
+        <!-- Keyboard setup -->
+        <androidx.cardview.widget.CardView android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:cardCornerRadius="14dp"
+            app:cardElevation="2dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:padding="18dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="KEYBOARD SETUP" android:textSize="10sp" android:textStyle="bold"
+                    android:textColor="@color/text_secondary" android:letterSpacing="0.12"
+                    android:layout_marginBottom="4dp"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="Enable the Wasurenai keyboard once, then switch to it whenever you want to type and record data."
+                    android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="12dp"/>
+                <Button android:id="@+id/btn_enable_keyboard" android:layout_width="match_parent"
+                    android:layout_height="48dp" android:text="Step 1 — Enable Keyboard in Settings"
+                    android:backgroundTint="@color/primary" android:textColor="@color/white"
+                    android:textSize="13sp" android:layout_marginBottom="8dp"/>
+                <Button android:id="@+id/btn_switch_keyboard" android:layout_width="match_parent"
+                    android:layout_height="48dp" android:text="Step 2 — Switch to Wasurenai Keyboard"
+                    android:backgroundTint="@color/primary_dark" android:textColor="@color/white"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </ScrollView>

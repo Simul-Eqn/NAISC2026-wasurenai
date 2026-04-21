@@ -15,27 +15,16 @@ class ConsentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         prefs = PreferencesManager(this)
 
-        // If already consented, skip straight to main
-        if (prefs.hasConsented) {
-            goToMain()
-            return
-        }
+        if (prefs.hasConsented) { launch(); return }
 
         binding = ActivityConsentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnAgree.setOnClickListener {
-            prefs.hasConsented = true
-            goToMain()
-        }
-
-        binding.btnDecline.setOnClickListener {
-            // Cannot use app without consent
-            finish()
-        }
+        binding.btnAgree.setOnClickListener { prefs.hasConsented = true; launch() }
+        binding.btnDecline.setOnClickListener { finish() }
     }
 
-    private fun goToMain() {
+    private fun launch() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }

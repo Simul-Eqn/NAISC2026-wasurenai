@@ -1,14 +1,17 @@
 package com.example.alzkeytracker
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.alzkeytracker.data.SyntheticDataGenerator
 import com.example.alzkeytracker.database.KeystrokeDatabase
 import com.example.alzkeytracker.databinding.ActivityMainBinding
 import com.example.alzkeytracker.utils.PreferencesManager
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -25,65 +28,54 @@ class MainActivity : AppCompatActivity() {
         prefs = PreferencesManager(this)
         db = KeystrokeDatabase.getInstance(this)
 
-        // Navigate to Android's keyboard settings so user can enable our keyboard
-        binding.btnEnableKeyboard.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS))
+        // ── Patient ID ────────────────────────────────────────────────────
+        binding.tvPatientId.text = prefs.userId
+        binding.btnCopyId.setOnClickListener {
+            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.setPrimaryClip(ClipData.newPlainText("Patient ID", prefs.userId))
+            Toast.makeText(this, "ID copied to clipboard", Toast.LENGTH_SHORT).show()
         }
 
-        // Navigate to keyboard switcher (bottom-bar icon equivalent)
-        binding.btnSwitchKeyboard.setOnClickListener {
-            val imm = getSystemService(INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
-            imm.showInputMethodPicker()
+        // ── Live keystroke counter ────────────────────────────────────────
+        lifecycleScope.launch {
+            db.keystrokeDao().getTotalCountFlow().collectLatest { count ->
+                val loggingText = if (prefs.isLoggingEnabled) "Recording  ●" else "Paused  ○"
+                binding.tvKeystrokeCount.text = "$count keystrokes collected"
+                binding.tvLoggingStatus.text = loggingText
+            }
         }
 
-        // Go to settings
+        // ── Logging toggle ────────────────────────────────────────────────
+        binding.switchLogging.isChecked = prefs.isLoggingEnabled
+        binding.switchLogging.setOnCheckedChangeListener { _, isChecked ->
+            prefs.isLoggingEnabled = isChecked
+        }
+
+        // ── Navigation ────────────────────────────────────────────────────
+        binding.btnAnalyse.setOnClickListener {
+            startActivity(Intent(this, AnalysisActivity::class.java))
+        }
+        binding.btnRawData.setOnClickListener {
+            startActivity(Intent(this, DataViewActivity::class.java))
+        }
         binding.btnSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
-        // View collected data
-        binding.btnViewData.setOnClickListener {
-            startActivity(Intent(this, DataViewActivity::class.java))
+        // ── Keyboard setup ────────────────────────────────────────────────
+        binding.btnEnableKeyboard.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS))
         }
-
-        // Generate synthetic data
-        binding.btnGenerateSynthetic.setOnClickListener {
-            lifecycleScope.launch {
-                val syntheticData = SyntheticDataGenerator.generateDataset(
-                    sessionsPerGroup = 5,
-                    userId = prefs.userId
-                )
-                db.keystrokeDao().insertAll(syntheticData)
-                runOnUiThread {
-                    binding.tvStatus.text =
-                        "Generated ${syntheticData.size} synthetic keystrokes.\nView them in Data Viewer."
-                }
-            }
+        binding.btnSwitchKeyboard.setOnClickListener {
+            val imm = getSystemService(INPUT_METHOD_SERVICE)
+                    as android.view.inputmethod.InputMethodManager
+            imm.showInputMethodPicker()
         }
-
-        // Toggle logging
-        binding.switchLogging.isChecked = prefs.isLoggingEnabled
-        binding.switchLogging.setOnCheckedChangeListener { _, isChecked ->
-            prefs.isLoggingEnabled = isChecked
-            updateStatusText()
-        }
-
-        updateStatusText()
     }
 
     override fun onResume() {
         super.onResume()
-        updateStatusText()
-    }
-
-    private fun updateStatusText() {
-        lifecycleScope.launch {
-            val count = db.keystrokeDao().getTotalCount()
-            val logging = if (prefs.isLoggingEnabled) "ON ✅" else "OFF ❌"
-            runOnUiThread {
-                binding.tvStatus.text =
-                    "Logging: $logging\nTotal keystrokes recorded: $count\nUser ID: ${prefs.userId}"
-            }
-        }
+        binding.tvPatientId.text = prefs.userId
+        binding.switchLogging.isChecked = prefs.isLoggingEnabled
     }
 }

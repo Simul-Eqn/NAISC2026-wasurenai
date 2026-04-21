@@ -5,25 +5,26 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [KeystrokeEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [KeystrokeEntity::class, AnalysisResultEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class KeystrokeDatabase : RoomDatabase() {
 
     abstract fun keystrokeDao(): KeystrokeDao
+    abstract fun analysisResultDao(): AnalysisResultDao
 
     companion object {
-        @Volatile
-        private var INSTANCE: KeystrokeDatabase? = null
+        @Volatile private var INSTANCE: KeystrokeDatabase? = null
 
-        fun getInstance(context: Context): KeystrokeDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+        fun getInstance(context: Context): KeystrokeDatabase =
+            INSTANCE ?: synchronized(this) {
+                Room.databaseBuilder(
                     context.applicationContext,
                     KeystrokeDatabase::class.java,
-                    "keystroke_database"
-                ).build()
-                INSTANCE = instance
-                instance
+                    "wasurenai_database"
+                ).build().also { INSTANCE = it }
             }
-        }
     }
 }

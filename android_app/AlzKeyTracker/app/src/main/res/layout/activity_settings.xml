@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/background">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar" android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" android:background="@color/primary"
+        app:titleTextColor="@color/white" app:navigationIconTint="@color/white"/>
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="Participant ID" android:textStyle="bold" android:layout_marginBottom="4dp"/>
-        <EditText android:id="@+id/et_user_id" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:inputType="text"
-            android:hint="e.g. participant_001" android:layout_marginBottom="16dp"/>
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:padding="20dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="Home Location Label" android:textStyle="bold" android:layout_marginBottom="4dp"/>
-        <EditText android:id="@+id/et_home_label" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:inputType="text"
-            android:hint="e.g. My Home" android:layout_marginBottom="16dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Patient ID" android:textSize="14sp" android:textStyle="bold"
+                android:textColor="@color/text_primary" android:layout_marginBottom="6dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="This is your unique identifier shared with your caregiver. It must be 3–64 characters using only letters, numbers, dash (-) or underscore (_)."
+                android:textSize="12sp" android:textColor="@color/text_secondary"
+                android:lineSpacingExtra="3dp" android:layout_marginBottom="10dp"/>
+            <EditText android:id="@+id/et_user_id"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="text" android:fontFamily="monospace"
+                android:textSize="16sp" android:layout_marginBottom="16dp"/>
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="Home Latitude" android:textStyle="bold" android:layout_marginBottom="4dp"/>
-        <EditText android:id="@+id/et_latitude" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:inputType="numberDecimal|numberSigned"
-            android:hint="e.g. 1.3521" android:layout_marginBottom="16dp"/>
+            <Button android:id="@+id/btn_save" android:layout_width="match_parent"
+                android:layout_height="52dp" android:text="Save"
+                android:backgroundTint="@color/primary" android:textColor="@color/white"
+                android:layout_marginBottom="12dp"/>
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="Home Longitude" android:textStyle="bold" android:layout_marginBottom="4dp"/>
-        <EditText android:id="@+id/et_longitude" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:inputType="numberDecimal|numberSigned"
-            android:hint="e.g. 103.8198" android:layout_marginBottom="24dp"/>
+            <TextView android:id="@+id/tv_message"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:textSize="13sp" android:lineSpacingExtra="3dp"
+                android:layout_marginBottom="32dp"/>
 
-        <Button android:id="@+id/btn_save" android:layout_width="match_parent"
-            android:layout_height="56dp" android:text="Save Settings"
-            android:backgroundTint="#1A237E" android:textColor="@android:color/white"
-            android:layout_marginBottom="12dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="About" android:textSize="14sp" android:textStyle="bold"
+                android:textColor="@color/text_primary" android:layout_marginBottom="6dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Wasurenai Keyboard v1.0\n\nThis research tool records keystroke timing data to assist in the early detection and monitoring of cognitive decline. It is not a medical diagnostic device. Always consult a qualified healthcare professional for medical advice."
+                android:textSize="12sp" android:textColor="@color/text_secondary"
+                android:lineSpacingExtra="4dp"/>
 
-        <TextView android:id="@+id/tv_message" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:textSize="14sp"
-            android:textColor="#00897B"/>
-
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

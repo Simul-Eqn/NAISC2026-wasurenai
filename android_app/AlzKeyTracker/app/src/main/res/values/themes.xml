@@ -1,34 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.AlzKeyTracker" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
-
-    <style name="Theme.AlzKeyTracker" parent="Base.Theme.AlzKeyTracker" />
-    <style name="KeyButton">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_margin">2dp</item>
-        <item name="android:backgroundTint">#37474F</item>
-        <item name="android:textColor">#ECEFF1</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:minHeight">0dp</item>
-    </style>
-
-    <style name="SpecialKeyButton">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_margin">2dp</item>
-        <item name="android:backgroundTint">#455A64</item>
-        <item name="android:textColor">#CFD8DC</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:minHeight">0dp</item>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Wasurenai" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/primary_light</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
     </style>
 </resources>
